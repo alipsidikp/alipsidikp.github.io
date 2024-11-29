@@ -6,7 +6,7 @@
       "golang",
       "backend"
     ],
-    "path": "/posts/2024-11-29-getting-started-golang.md",
+    "path": "/posts/2024-11-29-getting-started-golang.html",
     "excerpt": "\n# Getting Started with Go\n\nGo is a statically typed, compiled programming language designed at Google.\n\n## Key Features\n\n1. Simple and clean syntax\n2. Built-in concurrency support\n3. Strong standard ...",
     "readingTime": "1 min read",
     "content": "<h1 id=\"getting-started-with-go\">Getting Started with Go</h1>\n<p>Go is a statically typed, compiled programming language designed at Google.</p>\n<h2 id=\"key-features\">Key Features</h2>\n<ol>\n<li>Simple and clean syntax</li>\n<li>Built-in concurrency support</li>\n<li>Strong standard library</li>\n</ol>\n<pre><code class=\"language-go\">package main\n\nimport &quot;fmt&quot;\n\nfunc main() {\n    fmt.Println(&quot;Hello, Go!&quot;)\n}\n</code></pre>\n"
