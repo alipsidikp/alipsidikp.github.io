@@ -2,6 +2,11 @@ name: Build and Deploy Blog
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'posts/**'
+      - 'index.html'
+      - 'style.css'
+      - 'main.js'
   workflow_dispatch:
 
 jobs:
@@ -18,11 +23,14 @@ jobs:
       - name: Install Dependencies
         run: |
           npm init -y
-          # Use node-fetch v2 which supports CommonJS
-          npm install gray-matter reading-time marked prismjs node-fetch@2
+          npm install gray-matter@4.0.3 reading-time@1.5.0 marked@4.3.0 prismjs@1.29.0 node-fetch@2.7.0
 
-      - name: Create Directories
-        run: mkdir -p scripts posts
+      - name: Create Build Directory
+        run: |
+          mkdir -p build
+          cp index.html build/
+          cp style.css build/
+          cp main.js build/
 
       - name: Fetch Author Info
         run: |
@@ -45,7 +53,7 @@ jobs:
               followers: data.followers
             };
             
-            fs.writeFileSync('author.json', JSON.stringify(author, null, 2));
+            fs.writeFileSync('build/author.json', JSON.stringify(author, null, 2));
           }
 
           fetchGithubProfile().catch(console.error);
@@ -77,14 +85,18 @@ jobs:
           });
 
           const POSTS_DIR = 'posts';
-          const OUTPUT_FILE = 'posts.json';
+          const BUILD_DIR = 'build';
           
           function getAllPosts() {
             const posts = [];
             if (!fs.existsSync(POSTS_DIR)) {
-              console.log('Posts directory not found. Creating...');
-              fs.mkdirSync(POSTS_DIR);
+              console.log('Posts directory not found');
               return posts;
+            }
+            
+            // Create posts directory in build
+            if (!fs.existsSync(path.join(BUILD_DIR, 'posts'))) {
+              fs.mkdirSync(path.join(BUILD_DIR, 'posts'));
             }
             
             const files = fs.readdirSync(POSTS_DIR);
@@ -98,6 +110,9 @@ jobs:
               
               const readTime = readingTime(markdown);
               const html = marked(markdown);
+              
+              // Copy post to build directory
+              fs.writeFileSync(path.join(BUILD_DIR, 'posts', filename), content);
               
               posts.push({
                 title: data.title,
@@ -115,20 +130,20 @@ jobs:
           }
           
           const posts = getAllPosts();
-          fs.writeFileSync(OUTPUT_FILE, JSON.stringify(posts, null, 2));
+          fs.writeFileSync(path.join(BUILD_DIR, 'posts.json'), JSON.stringify(posts, null, 2));
           
           const tags = new Set();
           posts.forEach(post => post.tags.forEach(tag => tags.add(tag)));
-          fs.writeFileSync('tags.json', JSON.stringify(Array.from(tags), null, 2));
+          fs.writeFileSync(path.join(BUILD_DIR, 'tags.json'), JSON.stringify(Array.from(tags), null, 2));
           EOF
           
+          mkdir -p scripts
           node scripts/fetch-author.js
           node scripts/generate-index.js
 
-      - name: Commit and Push Changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Update generated files" || echo "No changes to commit"
-          git push
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: build
+          clean: true
