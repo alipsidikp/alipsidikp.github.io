@@ -18,7 +18,8 @@ jobs:
       - name: Install Dependencies
         run: |
           npm init -y
-          npm install gray-matter reading-time marked prismjs node-fetch
+          # Use node-fetch v2 which supports CommonJS
+          npm install gray-matter reading-time marked prismjs node-fetch@2
 
       - name: Create Directories
         run: mkdir -p scripts posts
