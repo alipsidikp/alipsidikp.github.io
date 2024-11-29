@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Blog</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Add Prism.js theme for code highlighting -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body>
@@ -18,11 +19,20 @@
                 <!-- Tags will be dynamically inserted here -->
             </div>
         </header>
+
+        <div id="authorSection">
+            <!-- Author info will be inserted here -->
+        </div>
+
         <main id="postsContainer">
             <!-- Posts will be dynamically inserted here -->
         </main>
+
         <div id="pagination" class="pagination"></div>
     </div>
-    <script src="/main.js"></script>
+
+    <!-- Add Prism.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

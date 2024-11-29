@@ -1,6 +1,75 @@
-/* Previous CSS styles remain the same, adding new styles below */
+:root {
+    --dark-blue: #1a1a2e;
+    --lighter-blue: #16213e;
+    --text-color: #e6e6e6;
+    --accent-color: #4a80f0;
+    --border-color: #2a2a3a;
+}
 
-/* Author section styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--dark-blue);
+    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.search-container {
+    margin-bottom: 1rem;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 0.8rem;
+    background: var(--lighter-blue);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.tag {
+    background: var(--lighter-blue);
+    border: 1px solid var(--border-color);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tag.active {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
 .author-section {
     background: var(--lighter-blue);
     border: 1px solid var(--border-color);
@@ -20,6 +89,7 @@
 }
 
 .author-info h2 {
+    color: var(--text-color);
     margin-bottom: 0.5rem;
 }
 
@@ -34,7 +104,55 @@
     text-decoration: none;
 }
 
-/* Pagination styles */
+.post {
+    background: var(--lighter-blue);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+}
+
+.post-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.post-title a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.post-meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+.reading-time {
+    margin-left: 1rem;
+    padding: 0.2rem 0.6rem;
+    background: var(--dark-blue);
+    border-radius: 12px;
+}
+
+.post-excerpt {
+    margin-bottom: 1rem;
+}
+
+.post-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.post-tag {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.8rem;
+    background: var(--dark-blue);
+    border-radius: 12px;
+    cursor: pointer;
+}
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -61,82 +179,25 @@
     cursor: not-allowed;
 }
 
-/* Reading time badge */
-.reading-time {
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    background: var(--dark-blue);
-    border-radius: 12px;
-    font-size: 0.8rem;
-    margin-left: 1rem;
-}
-
-/* Syntax highlighting */
-pre {
-    background: var(--dark-blue);
+.error {
+    background: #ff5757;
+    color: white;
     padding: 1rem;
     border-radius: 4px;
-    overflow-x: auto;
     margin: 1rem 0;
 }
 
-code {
-    font-family: 'Fira Code', monospace;
-    font-size: 0.9em;
-}
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
 
-/* Prism.js theme customization */
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-    color: #6a9955;
-}
+    .author-section {
+        flex-direction: column;
+        text-align: center;
+    }
 
-.token.punctuation {
-    color: #d4d4d4;
-}
-
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
-    color: #b5cea8;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-    color: #ce9178;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-    color: #d4d4d4;
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-    color: #569cd6;
-}
-
-.token.function,
-.token.class-name {
-    color: #dcdcaa;
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-    color: #d16969;
+    .author-links {
+        justify-content: center;
+    }
 }
