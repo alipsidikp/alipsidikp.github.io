@@ -1,0 +1,15 @@
+[
+  {
+    "title": "Getting Started with Golang",
+    "date": "2024-11-29T00:00:00.000Z",
+    "tags": [
+      "golang",
+      "backend"
+    ],
+    "path": "/posts/2024-11-29.01-getting-started.md",
+    "excerpt": "\nAn introduction to Golang and its key features...\n\n## Why Golang?\n\nGolang is......",
+    "readingTime": "1 min read",
+    "content": "<p>An introduction to Golang and its key features...</p>\n<h2 id=\"why-golang\">Why Golang?</h2>\n<p>Golang is...</p>\n",
+    "lastModified": "2024-11-29T10:13:07.871Z"
+  }
+]
