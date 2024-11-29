@@ -180,3 +180,26 @@ code {
 .back-link:hover {
     text-decoration: underline;
 }
+
+.pagination button {
+    min-width: 2.5rem;  // Add this line
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+    margin: 1.5rem 0 1rem;
+}
+
+.post-content p {
+    margin: 1rem 0;
+}
+
+.post-content ul,
+.post-content ol {
+    margin: 1rem 0;
+    padding-left: 2rem;
+}

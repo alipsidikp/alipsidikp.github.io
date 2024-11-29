@@ -9,7 +9,7 @@ const postHtmlTemplate = (data, html) => `<!DOCTYPE html>
 <html>
 <head>
     <title>${data.title}</title>
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>

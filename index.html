@@ -5,25 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Developer Notes</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
-        <header>
-            <div class="header-content">
-                <h1>Developer Notes</h1>
-                <div class="author-info">
-                    <a href="" id="githubLink" target="_blank">
-                        <img id="authorAvatar" src="" alt="" class="author-avatar">
-                        <span id="authorName"></span>
-                    </a>
-                </div>
+        <header class="header-content">
+            <h1>Developer Notes</h1>
+            <div class="author-info">
+                <a href="" id="githubLink" target="_blank">
+                    <img id="authorAvatar" src="" alt="" class="author-avatar">
+                    <span id="authorName"></span>
+                </a>
             </div>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search titles...">
-            </div>
-            <div id="tagContainer" class="tag-container"></div>
         </header>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search titles...">
+        </div>
+        <div id="tagContainer" class="tag-container"></div>
         <main id="postsContainer"></main>
         <div id="pagination" class="pagination"></div>
     </div>
