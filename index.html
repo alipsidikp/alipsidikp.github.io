@@ -3,36 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Blog</title>
+    <title>Developer Notes</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Add Prism.js theme for code highlighting -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Developer Notes</h1>
+            <div class="header-content">
+                <h1>Developer Notes</h1>
+                <div class="author-info">
+                    <a href="" id="githubLink" target="_blank">
+                        <img id="authorAvatar" src="" alt="" class="author-avatar">
+                        <span id="authorName"></span>
+                    </a>
+                </div>
+            </div>
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Search titles...">
             </div>
-            <div id="tagContainer" class="tag-container">
-                <!-- Tags will be dynamically inserted here -->
-            </div>
+            <div id="tagContainer" class="tag-container"></div>
         </header>
-
-        <div id="authorSection">
-            <!-- Author info will be inserted here -->
-        </div>
-
-        <main id="postsContainer">
-            <!-- Posts will be dynamically inserted here -->
-        </main>
-
+        <main id="postsContainer"></main>
         <div id="pagination" class="pagination"></div>
     </div>
-
-    <!-- Add Prism.js for syntax highlighting -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

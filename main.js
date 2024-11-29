@@ -165,23 +165,10 @@ function changePage(newPage) {
 function renderAuthor() {
     if (!author) return;
 
-    const headerElement = document.querySelector('header');
-    if (!headerElement) return;
-
-    const authorHTML = `
-        <div class="author-section">
-            <img src="${author.avatar}" alt="${author.name}" class="author-avatar">
-            <div class="author-info">
-                <h2>${author.name}</h2>
-                ${author.bio ? `<p>${author.bio}</p>` : ''}
-                <div class="author-links">
-                    <a href="${author.github}" target="_blank">GitHub</a>
-                    ${author.blog ? `<a href="${author.blog}" target="_blank">Website</a>` : ''}
-                </div>
-            </div>
-        </div>
-    `;
-    headerElement.insertAdjacentHTML('afterend', authorHTML);
+    document.getElementById('authorAvatar').src = author.avatar;
+    document.getElementById('authorAvatar').alt = author.name;
+    document.getElementById('authorName').textContent = author.name;
+    document.getElementById('githubLink').href = author.github;
 }
 
 // Event listeners
