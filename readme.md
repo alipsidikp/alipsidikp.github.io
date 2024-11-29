@@ -26,6 +26,7 @@ npm install
 
 ### Run Locally
 ```bash
+node scripts/generate-local.js
 npm start
 ```
 Visit http://localhost:3000

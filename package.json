@@ -1,21 +1,16 @@
 {
   "name": "alipsidikp.github.io",
   "version": "1.0.0",
-  "main": "main.js",
+  "description": "Tech Blog using GitHub Pages",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate": "node scripts/generate-local.js",
+    "start": "npm run generate && npx http-server . -p 3000"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "gray-matter": "^4.0.3",
-    "marked": "^15.0.3",
-    "node-fetch": "^2.7.0",
-    "prismjs": "^1.29.0",
+    "marked": "^4.3.0",
     "reading-time": "^1.5.0"
   },
-  "description": "",
   "devDependencies": {
     "http-server": "^14.1.1"
   }
