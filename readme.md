@@ -57,7 +57,6 @@ Use triple backticks with language:
 def hello():
     print("Hello World")
 ```
-```
 
 Supported languages:
 - python
