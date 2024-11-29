@@ -2,8 +2,6 @@ name: Build and Deploy Blog
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ gh-pages ]
   workflow_dispatch:
 
 jobs:
@@ -19,11 +17,11 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          npm install gray-matter
-          npm install reading-time
-          npm install marked
-          npm install prismjs
-          npm install node-fetch
+          npm init -y
+          npm install gray-matter reading-time marked prismjs node-fetch
+
+      - name: Create Directories
+        run: mkdir -p scripts posts
 
       - name: Fetch Author Info
         run: |
@@ -46,7 +44,7 @@ jobs:
               followers: data.followers
             };
             
-            fs.writeFileSync('docs/author.json', JSON.stringify(author, null, 2));
+            fs.writeFileSync('author.json', JSON.stringify(author, null, 2));
           }
 
           fetchGithubProfile().catch(console.error);
@@ -68,7 +66,6 @@ jobs:
           require('prismjs/components/prism-bash');
           require('prismjs/components/prism-json');
 
-          // Configure marked to use Prism for syntax highlighting
           marked.setOptions({
             highlight: function(code, lang) {
               if (Prism.languages[lang]) {
@@ -78,11 +75,17 @@ jobs:
             }
           });
 
-          const POSTS_DIR = 'docs/posts';
-          const OUTPUT_FILE = 'docs/posts.json';
+          const POSTS_DIR = 'posts';
+          const OUTPUT_FILE = 'posts.json';
           
           function getAllPosts() {
             const posts = [];
+            if (!fs.existsSync(POSTS_DIR)) {
+              console.log('Posts directory not found. Creating...');
+              fs.mkdirSync(POSTS_DIR);
+              return posts;
+            }
+            
             const files = fs.readdirSync(POSTS_DIR);
             
             files.forEach(filename => {
@@ -92,10 +95,7 @@ jobs:
               const content = fs.readFileSync(filePath, 'utf-8');
               const { data, content: markdown } = matter(content);
               
-              // Generate reading time
               const readTime = readingTime(markdown);
-              
-              // Convert markdown to HTML with syntax highlighting
               const html = marked(markdown);
               
               posts.push({
@@ -116,18 +116,18 @@ jobs:
           const posts = getAllPosts();
           fs.writeFileSync(OUTPUT_FILE, JSON.stringify(posts, null, 2));
           
-          // Generate tags summary
           const tags = new Set();
           posts.forEach(post => post.tags.forEach(tag => tags.add(tag)));
-          fs.writeFileSync('docs/tags.json', JSON.stringify(Array.from(tags), null, 2));
+          fs.writeFileSync('tags.json', JSON.stringify(Array.from(tags), null, 2));
           EOF
           
-          mkdir -p scripts
           node scripts/fetch-author.js
           node scripts/generate-index.js
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: docs
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Update generated files" || echo "No changes to commit"
+          git push
