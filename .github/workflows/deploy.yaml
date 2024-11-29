@@ -16,22 +16,17 @@ jobs:
           node-version: '20'
 
       - name: Install Dependencies
-        run: |
-          npm init -y
-          npm install gray-matter@4.0.3 reading-time@1.5.0 marked@4.3.0 node-fetch@2.7.0
+        run: npm install gray-matter@4.0.3 reading-time@1.5.0 marked@4.3.0 node-fetch@2.7.0
 
       - name: Create Build Directory
         run: |
-          mkdir -p build
+          mkdir -p build/posts
           cp index.html build/
           cp style.css build/
           cp main.js build/
 
       - name: Generate Content
-        run: |
-          mkdir -p scripts
-          cp scripts/generate-index.js scripts/
-          node scripts/generate-index.js
+        run: node scripts/generate-index.js
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
